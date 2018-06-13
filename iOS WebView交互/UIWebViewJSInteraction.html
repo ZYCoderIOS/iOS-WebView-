@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <title>JS调用OC方法</title>
+            </head>
+    <body>
+        <input type="button" value="JS调用OC方法无参数" onclick="jsInvokeOCNoParm()" disable='true'/>
+        <input type="button" value="JS调用OC方法有一个参数" onclick="jsInvokeOCWithParm1();"/>
+        <input type="button" value="JS调用OC方法有两个参数" onclick="jsInvokeOCWithParm1Parm2();"/>
+        <input type="button" value="OC调用JS方法有返回值" onclick="jsInvokeOCReturnValue();"/>
+    </body>
+    <script>
+        function jsInvokeOCNoParm(){
+            window.liqu_app.jsInvokeOCNoParm();
+        }
+    
+        function jsInvokeOCWithParm1(){
+            window.liqu_app.jsInvokeOCWithParm1('this is a parm');
+        }
+
+        function jsInvokeOCWithParm1Parm2(){
+            var model = new Object();
+            model.name = 'js';
+            model.age = 18;
+            window.liqu_app.jsInvokeOCWithParm1Parm2('this is a parm',JSON.stringify(model));
+        }
+    
+        function jsInvokeOCReturnValue(){
+            var str = window.liqu_app.jsInvokeOCReturnValue();
+            var model = JSON.parse(str);
+            alert('jsInvokeOCReturnValue___' + model.name);
+        }
+    
+        <!--模拟打开App立即获取App内部信息的过程-->
+        jsInvokeOCReturnValue();
+        
+        function ocCallJSMethod(str){
+            var model = JSON.parse(str);
+            alert('ocCallJSMethod_____' + model.name);
+            return true;
+        }
+    </script>
+    <style>
+        input {
+            display:block;
+            margin:20px auto;
+        }
+    </style>
+</html>

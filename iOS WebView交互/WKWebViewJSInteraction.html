@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <title>JS调用OC方法</title>
+            </head>
+    <body>
+        <input type="button" value="JS调用OC方法无参数,看日志" onclick="jsInvokeOCNoParm()" disable='true'/>
+        <input type="button" value="OC调用JS方法有返回值" onclick="jsInvokeOCReturnValue();"/>
+    </body>
+    <script>
+        function jsInvokeOCNoParm() {
+            window.webkit.messageHandlers.liqu_app.postMessage('123');
+        }
+    
+        function jsInvokeOCReturnValue(){
+            window.webkit.messageHandlers.liqu_app.postMessage('fetchUserInfo');
+        }
+    
+        <!--模拟打开App立即获取App内部信息的过程-->
+        window.webkit.messageHandlers.liqu_app.postMessage('fetchUserInfo');
+
+        function ocCallJSMethod(str){
+            var model = JSON.parse(str);
+            alert('ocCallJSMethod_____' + model.name);
+            return true;
+        }
+    </script>
+    <style>
+        input {
+            display:block;
+            margin:20px auto;
+            font-size:30px;
+        }
+    </style>
+</html>
